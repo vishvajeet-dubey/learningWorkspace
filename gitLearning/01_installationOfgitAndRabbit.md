@@ -6,7 +6,7 @@ RabbitVCS is a set of graphical tools written to provide simple and straightforw
 
 
 
-Below are the offical link for rabbit<br>
+Below are the offical link for rabbit
 * [Download](http://wiki.rabbitvcs.org/wiki/install/ubuntu)
 
 
