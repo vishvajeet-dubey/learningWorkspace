@@ -49,7 +49,8 @@ java version "1.8.0_121"
 Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
 ```
-* 
+
+
 # Scala almond kernel Instructions for Linux
 
 *Note: These instructions are over 3 years old. Please consult the Scala docs and
@@ -75,17 +76,17 @@ $ ./coursier launch --fork almond:0.10.0 --scala 2.12.11 -- --install
 
 Short Scala versions, like just 2.12 or 2.13, are accepted too. The available versions of Almond can be found here. Not all Almond and Scala versions combinations are available. See the possible combinations here).
 
-* Equivalent Windows command  
-    Once the kernel is installed, you can use it within Jupyter or nteract.
+* **Equivalent Windows command**  
+    - Once the kernel is installed, you can use it within Jupyter or nteract.
 
-* Getting help about the launcher  
-    pass --help instead of --install, like
+* **Getting help about the launcher**  
+    - pass --help instead of --install, like
 ```
 $ ./coursier launch --fork almond -- --help
 ```
 
-* Update the almond kernel  
-    To update the almond kernel, just re-install it, but passing the --force option to almond (like ./coursier launch --fork almond -- --install --force). That will override any previous almond (or kernel with name scala).
+* **Update the almond kernel**  
+    - To update the almond kernel, just re-install it, but passing the `--force` option to almond (like `./coursier launch --fork almond -- --install --force`). That will override any previous almond (or kernel with name `scala`).
 
-* Uninstall the almond kernel  
-    To uninstall the almond kernel, use jupyter kernelspec remove scala.
+* **Uninstall the almond kernel**  
+    - To uninstall the almond kernel, use `jupyter kernelspec remove scala`.
