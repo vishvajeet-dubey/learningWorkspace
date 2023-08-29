@@ -50,7 +50,7 @@ Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
 ```
 * 
-# Scala Kernel Instructions for MacOS
+# Scala Kernel Instructions for Linux
 
 *Note: These instructions are over 3 years old. Please consult the Scala docs and
 the [Almond docs](https://almond.sh/docs/quick-start-install) for up-to-date instructions.*
