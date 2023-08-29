@@ -66,25 +66,26 @@ $ chmod +x coursier
 $ ./coursier launch --fork almond -- --install
 $ rm -f coursier
 ```
-Note the -- before --install, separating the arguments passed to Almond from the ones handled by coursier.
 
+Note the -- before --install, separating the arguments passed to Almond from the ones handled by coursier.  
 You can specify explicit Almond and / or Scala versions, like
 ```
 $ ./coursier launch --fork almond:0.10.0 --scala 2.12.11 -- --install
 ```
+
 Short Scala versions, like just 2.12 or 2.13, are accepted too. The available versions of Almond can be found here. Not all Almond and Scala versions combinations are available. See the possible combinations here).
 
 * Equivalent Windows command
-Once the kernel is installed, you can use it within Jupyter or nteract.
+    Once the kernel is installed, you can use it within Jupyter or nteract.
 
 * Getting help about the launcher
-Pass --help instead of --install, like
+    pass --help instead of --install, like
 ```
 $ ./coursier launch --fork almond -- --help
 ```
 
 * Update the almond kernel
-To update the almond kernel, just re-install it, but passing the --force option to almond (like ./coursier launch --fork almond -- --install --force). That will override any previous almond (or kernel with name scala).
+    To update the almond kernel, just re-install it, but passing the --force option to almond (like ./coursier launch --fork almond -- --install --force). That will override any previous almond (or kernel with name scala).
 
 * Uninstall the almond kernel
-To uninstall the almond kernel, use jupyter kernelspec remove scala.
+    To uninstall the almond kernel, use jupyter kernelspec remove scala.
