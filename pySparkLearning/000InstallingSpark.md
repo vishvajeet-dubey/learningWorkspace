@@ -50,7 +50,7 @@ Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
 ```
 * 
-# Scala Kernel Instructions for Linux
+# Scala almond kernel Instructions for Linux
 
 *Note: These instructions are over 3 years old. Please consult the Scala docs and
 the [Almond docs](https://almond.sh/docs/quick-start-install) for up-to-date instructions.*
@@ -58,29 +58,33 @@ the [Almond docs](https://almond.sh/docs/quick-start-install) for up-to-date ins
 1. Download Scala https://www.scala-lang.org/download/
 
    - check Java version (`java -version`)
-   - Install Scala sbt `brew install sbt@1`
-     ```
-     You can use $SBT_OPTS to pass additional JVM options to sbt.
-     Project specific options should be placed in .sbtopts in the root of your project.
-     Global settings should be placed in /usr/local/etc/sbtopts
 
-2. Install coursier
+2. Almond can then be fetched and installed with coursier, like
+```
+$ curl -Lo coursier https://git.io/coursier-cli
+$ chmod +x coursier
+$ ./coursier launch --fork almond -- --install
+$ rm -f coursier
+```
+Note the -- before --install, separating the arguments passed to Almond from the ones handled by coursier.
 
-   `brew install --HEAD coursier/formulas/coursier`
+You can specify explicit Almond and / or Scala versions, like
+```
+$ ./coursier launch --fork almond:0.10.0 --scala 2.12.11 -- --install
+```
+Short Scala versions, like just 2.12 or 2.13, are accepted too. The available versions of Almond can be found here. Not all Almond and Scala versions combinations are available. See the possible combinations here).
 
-3. Install almond
+* Equivalent Windows command
+Once the kernel is installed, you can use it within Jupyter or nteract.
 
-   - `git clone https://github.com/willingc/almond.git`
-   - edit `project/plugin.sbt`
-      - add `addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.1.0-SNAPSHOT")`
-   - bootstrap install
+* Getting help about the launcher
+Pass --help instead of --install, like
+```
+$ ./coursier launch --fork almond -- --help
+```
 
-     ```
-     coursier bootstrap \
-     →     -i user -I user:sh.almond:scala-kernel-api_$SCALA_VERSION:$ALMOND_VERSION \
-     →     sh.almond:scala-kernel_$SCALA_VERSION:$ALMOND_VERSION \
-     →     -o almond
-     ```
+* Update the almond kernel
+To update the almond kernel, just re-install it, but passing the --force option to almond (like ./coursier launch --fork almond -- --install --force). That will override any previous almond (or kernel with name scala).
 
-   - `./almond --install`
-
+* Uninstall the almond kernel
+To uninstall the almond kernel, use jupyter kernelspec remove scala.
