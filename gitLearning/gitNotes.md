@@ -38,7 +38,7 @@ here, `Root` and `foo` -> called tree -> basically folders
 * in git each snapshot have some number of parents.
 ![Alt text](resource/img02.png)
 
-**READ COMICS**
+**READ COMICS**  </br>
 ![Alt text](resource/comic01.jpg)
 
 </br></br></br></br>
