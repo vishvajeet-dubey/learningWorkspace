@@ -36,7 +36,7 @@ i.e:
 ```
 <br></br>
 **creating employee table under emp schema**
-```
+```sql
 drop table if exists emp.employee;
 
 create table if not exists emp.employee
@@ -60,7 +60,7 @@ insert into emp.employee values
 
 <br></br>
 **Creating department table under emp schema**
-```
+```sql
 drop table if exists emp.department;
 
 create table if not exists emp.department
@@ -79,7 +79,7 @@ insert into emp.department values
  
 <br></br>
 **Creating manager table under emp schema**
-```
+```sql
 drop table if exists emp.manager;
 
 create table if not exists emp.manager
@@ -100,7 +100,7 @@ insert into emp.manager values
 
 <br></br>
 **Creating product table under emp schema**
-```
+```sql
 drop table if exists emp.projects;
 
 create table if not exists emp.projects
@@ -122,7 +122,7 @@ insert into emp.projects values
  
 <br></br>
  **Below are the all table under emp schema**
-```
+```sql
 SELECT * FROM emp.employee;
 SELECT * FROM emp.department;
 SELECT * FROM emp.manager;
@@ -136,12 +136,12 @@ In order to fetch the employee name and department name we need to join the tabl
 
 
 ## 02.01 INNER JOIN / JOIN<a class="anchor" id="02.01"></a>
-- Only return the matching value from both the table. **
+- **Only return the matching value from both the table.** **
 - It can represented by keyword "join" or "inner join" in any case.
-- ON Condition: Column which present in both table. Column name can be different but the value should be present in the table.
+- **ON Condition:** Column which present in both table. Column name can be different but the value should be present in the table.
 - with using inner join lets try to solve the above problem:
 
-```
+```sql
 SELECT
 emp_table.emp_name,
 dep_table.dept_name
@@ -166,7 +166,7 @@ detail.
 - In case of join condition fail, it will return the "null" for right table but from left table all the records will return.
 - With using inner join lets try to solve the above problem.
 
-```
+```sql
 SELECT
 emp_table.emp_name,
 dep_table.dept_name
@@ -187,7 +187,7 @@ ON emp_table.dept_id=dep_table.dept_id;
 - With using inner join lets try to solve the above problem.
 
  
-```
+```sql
 SELECT
 emp_table.emp_name,
 dep_table.dept_name
@@ -200,7 +200,7 @@ ON emp_table.dept_id=dep_table.dept_id;
 
 
 **Select all the tables:**
-```
+```sql
 SELECT * FROM emp.employee;
 SELECT * FROM emp.department;
 SELECT * FROM emp.manager;
@@ -211,7 +211,7 @@ SELECT * FROM emp.projects;
 
 
 **Fetch details of all emp, their manager, their department and the projects they work on.**
-```
+```sql
 SELECT e.emp_name, m.manager_name, d.dept_name, p.project_name
 FROM emp.employee e
 JOIN emp.manager m ON m.manager_id = e.manager_id
