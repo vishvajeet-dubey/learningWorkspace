@@ -5,6 +5,7 @@
     * [02.01 Inner Join/Join](#02.01)
     * [02.02 Left Join/Left Outer Join](#02.02)
     * [02.03 Right Join/Right Outer Join](#02.03)
+    * [02.04 Full join](#02.04)
 
 # 01. BASIC SQL <a class="anchor" id="01"></a>
 
@@ -23,11 +24,13 @@ fetched, the temporary image of the merged tables is dumped.
 **Create the sample employee database to understand the join(we are
 going to create under emp schema)**
 
-`CREATE SCHEMA IF NOT EXISTS schema_name AUTHORIZATION user_name;`
+```sql
+CREATE SCHEMA IF NOT EXISTS schema_name AUTHORIZATION user_name;
 
-i.e:
+--i.e:
 
 `CREATE SCHEMA IF NOT EXISTS emp AUTHORIZATION postgres;`
+```
 
 **Help**
 ```
@@ -136,7 +139,7 @@ In order to fetch the employee name and department name we need to join the tabl
 
 
 ## 02.01 INNER JOIN / JOIN<a class="anchor" id="02.01"></a>
-- **Only return the matching value from both the table.** **
+- <mark>Only return the matching value from both the table.</mark> **
 - It can represented by keyword "join" or "inner join" in any case.
 - **ON Condition:** Column which present in both table. Column name can be different but the value should be present in the table.
 - with using inner join lets try to solve the above problem:
@@ -161,7 +164,7 @@ detail.
 
 ## 02.02 LEFT JOIN / LEFT OUTER JOIN<a class="anchor" id="02.02"></a>
 
-- **LEFT JOIN = INNER JOIN + any additional records in the left table.** **
+- <mark>LEFT JOIN = INNER JOIN + any additional records in the left table.</mark> **
 - In case of if any record present in left table but not present in right then we will get the Null as result.
 - In case of join condition fail, it will return the "null" for right table but from left table all the records will return.
 - With using inner join lets try to solve the above problem.
@@ -181,7 +184,7 @@ ON emp_table.dept_id=dep_table.dept_id;
 
 ## 02.03 RIGHT JOIN / RIGHT OUTER JOIN<a class="anchor" id="02.03"></a>
 
-- **RIGHT JOIN = INNER JOIN + any additional records in the right table.** **
+- <mark>RIGHT JOIN = INNER JOIN + any additional records in the right table.</mark> **
 - In case of if any record present in right table but not present in left then we will get the Null as result.
 - In case of join condition fail, it will rerun the "null" for lef ttable but from right table all the records will return.
 - With using inner join lets try to solve the above problem.
@@ -220,3 +223,84 @@ LEFT JOIN emp.projects p ON p.team_member_id=e.emp_id;
 ```
 [↵ Back to Contenet](#content)
 <br></br>
+
+
+**Creating some sample schema to understand the other joins**
+```sql
+drop table if exists employee;
+create table if not exists employee
+(
+	emp_id			varchar(20),
+	emp_name		varchar(50),
+	salary			int,
+	dept_id			varchar(20),
+	manager_id		varchar(20)
+);
+insert into employee values
+('E1', 'Rahul', 15000, 'D1', 'M1'),
+('E2', 'Manoj', 15000, 'D1', 'M1'),
+('E3', 'James', 55000, 'D2', 'M2'),
+('E4', 'Michael', 25000, 'D2', 'M2'),
+('E5', 'Ali', 20000, 'D10', 'M3'),
+('E6', 'Robin', 35000, 'D10', 'M3');
+
+
+drop table if exists department;
+create table if not exists department
+(
+	dept_id			varchar(20),
+	dept_name		varchar(50)
+);
+insert into department values
+('D1', 'IT'),
+('D2', 'HR'),
+('D3', 'Finance'),
+('D4', 'Admin');
+
+drop table if exists company;
+create table if not exists company
+(
+	company_id		varchar(10),
+	company_name	varchar(50),
+	location		varchar(20)
+);
+insert into company values
+('C001', 'techTFQ Solutions', 'Kuala Lumpur');
+
+insert into company values
+('C002', 'techTFQ Media Group', 'Singapore');
+
+
+DROP TABLE if exists family;
+CREATE TABLE if not exists family
+(
+    member_id     VARCHAR(10),
+    name          VARCHAR(50),
+    age           INT,
+    parent_id     VARCHAR(10)
+);
+insert into family values
+  ('F1', 'David', 4, 'F5'),
+  ('F2', 'Carol', 10, 'F5'),
+  ('F3', 'Michael', 12, 'F5'),
+  ('F4', 'Johnson', 36, ''),
+  ('F5', 'Maryam', 40, 'F6'),
+  ('F6', 'Stewart', 70, ''),
+  ('F7', 'Rohan', 6, 'F4'),
+  ('F8', 'Asha', 8, 'F4');
+```
+
+Run above sql query to create table to undertand rest joins.    
+[↵ Back to Contenet](#content)
+<br></br>
+
+
+## 02.04 Full Join<a class="anchor" id="02.04"></a>
+- <mark>INNER JOIN + all remaining records from left + all remaining records from right table.</mark> **
+- Return all the records from both table.
+- substituting NULL for any row value that is not present in the other table.
+
+```
+FULL Join = INNER Join + all remaining records from Left Table (returns null value for any columns fetched from right table) 
+                       + all remaining records from Right Table (returns null value for any columns fetched from left table)
+```
