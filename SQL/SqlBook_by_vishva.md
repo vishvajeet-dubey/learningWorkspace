@@ -139,9 +139,9 @@ In order to fetch the employee name and department name we need to join the tabl
 
 
 ## 02.01 INNER JOIN / JOIN<a class="anchor" id="02.01"></a>
-- <mark>Only return the matching value from both the table.</mark> **
+- <span style="color:black; background-color: yellow;">Only return the matching value from both the table.</span> **
 - It can represented by keyword "join" or "inner join" in any case.
-- **ON Condition:** Column which present in both table. Column name can be different but the value should be present in the table.
+- <span style="color:black; background-color: yellow;">ON Condition:</span> Column which present in both table. Column name can be different but the value should be present in the table.
 - with using inner join lets try to solve the above problem:
 
 ```sql
@@ -164,7 +164,7 @@ detail.
 
 ## 02.02 LEFT JOIN / LEFT OUTER JOIN<a class="anchor" id="02.02"></a>
 
-- <mark>LEFT JOIN = INNER JOIN + any additional records in the left table.</mark> **
+- <span style="color:black; background-color: yellow;">LEFT JOIN = INNER JOIN + any additional records in the left table.</span> **
 - In case of if any record present in left table but not present in right then we will get the Null as result.
 - In case of join condition fail, it will return the "null" for right table but from left table all the records will return.
 - With using inner join lets try to solve the above problem.
@@ -184,7 +184,7 @@ ON emp_table.dept_id=dep_table.dept_id;
 
 ## 02.03 RIGHT JOIN / RIGHT OUTER JOIN<a class="anchor" id="02.03"></a>
 
-- <mark>RIGHT JOIN = INNER JOIN + any additional records in the right table.</mark> **
+- <span style="color:black; background-color: yellow;">RIGHT JOIN = INNER JOIN + any additional records in the right table.</span> **
 - In case of if any record present in right table but not present in left then we will get the Null as result.
 - In case of join condition fail, it will rerun the "null" for lef ttable but from right table all the records will return.
 - With using inner join lets try to solve the above problem.
@@ -296,7 +296,7 @@ Run above sql query to create table to undertand rest joins.
 
 
 ## 02.04 Full Join<a class="anchor" id="02.04"></a>
-- <mark>INNER JOIN + all remaining records from left + all remaining records from right table.</mark> **
+- <span style="color:black; background-color: yellow;">INNER JOIN + all remaining records from left + all remaining records from right table.</span> **
 - Return all the records from both table.
 - substituting NULL for any row value that is not present in the other table.
 
@@ -304,3 +304,4 @@ Run above sql query to create table to undertand rest joins.
 FULL Join = INNER Join + all remaining records from Left Table (returns null value for any columns fetched from right table) 
                        + all remaining records from Right Table (returns null value for any columns fetched from left table)
 ```
+
