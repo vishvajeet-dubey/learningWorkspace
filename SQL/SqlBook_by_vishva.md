@@ -5,7 +5,9 @@
     * [02.01 Inner Join/Join](#02.01)
     * [02.02 Left Join/Left Outer Join](#02.02)
     * [02.03 Right Join/Right Outer Join](#02.03)
-    * [02.04 Full join](#02.04)
+    * [02.04 Full Join/Full Outer Join](#02.04)
+    * [02.05 Cross Join](#02.05)
+    * [02.06 Natural Join](#02.06)
 
 # 01. BASIC SQL <a class="anchor" id="01"></a>
 
@@ -297,11 +299,74 @@ Run above sql query to create table to undertand rest joins.
 
 ## 02.04 Full Join<a class="anchor" id="02.04"></a>
 - **INNER JOIN + all remaining records from left + all remaining records from right table.** **
+- It is also called **full outer join**. `outer` keyword is optional.
 - Return all the records from both table.
 - substituting NULL for any row value that is not present in the other table.
 
-```
+```sql
 FULL Join = INNER Join + all remaining records from Left Table (returns null value for any columns fetched from right table) 
                        + all remaining records from Right Table (returns null value for any columns fetched from left otable)
+
+FULL JOIN = INNER JOIN + LEFT JOIN + RIGHT JOIN                       
 ```
 
+**Example**    
+```sql
+select e.emp_name, d.dept_name
+from employee e
+full join department d on d.dept_id=e.dept_id;
+```
+
+<br></br>
+**Below keyword have same functionality**
+```sql
+left join ==> left outer join
+right join ==> right out join
+inner join ==> join
+full join ==> full outer join
+```
+
+[↵ Back to Contenet](#content)
+<br></br>
+
+## 02.05 Cross Join <a class="anchor" id="02.05"></a>
+- A cross join is a join operation that produces the `Cartesian product` of two or more tables. **
+- In Math, a **Cartesian product** is a mathematical operation that returns a product set of multiple sets.
+- For example, with two sets A {x,y,z} and B {1,2,3}, the Cartesian product of A x B is the set of all ordered pairs (x,1), (x,2), (x,3), (y,1) (y,2), (y,3), (z,1), (z,2), (z,3).
+- Does required the join condition.
+
+
+The following picture illustrates the Cartesian product of A and B:   
+
+![alt imaage01](resource/image01.jpeg)
+<br></br>
+
+**Example**
+```sql
+select e.emp_name, d.dept_name
+from employee e --6
+cross join department d ; --4
+```
+<br></br>
+
+
+**Problem01:**    
+Write a query to fetch the employee name and their corresponding department name.
+also make sure to display the company name and the company location corresponding to each employee.
+
+```sql
+--CROSS JOIN
+select e.emp_name, d.dept_name, c.company_name, c.location
+from employee e
+inner join department d on e.dept_id=d.dept_id
+cross join company c;
+```
+[↵ Back to Contenet](#content)
+<br></br>
+
+
+
+## 02.06 Natural Join <a class="anchor" id="02.06"></a>
+- A NATURAL JOIN is a JOIN operation that creates an implicit join clause for you based on the common columns in the two tables being joined. Common columns are columns that have the same name in both tables.
+- A NATURAL JOIN can be an [INNER join](#02.01), a [LEFT OUTER join](#02.02), or a [RIGHT OUTER join](#02.03). The default is [INNER join](#02.01).
+- 
