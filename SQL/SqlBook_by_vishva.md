@@ -338,7 +338,7 @@ full join ==> full outer join
 
 The following picture illustrates the Cartesian product of A and B:   
 
-![alt imaage01](resource/image01.jpeg)
+![alt imaage01](resource/image01)
 <br></br>
 
 **Example**
@@ -369,4 +369,205 @@ cross join company c;
 ## 02.06 Natural Join <a class="anchor" id="02.06"></a>
 - A NATURAL JOIN is a JOIN operation that creates an implicit join clause for you based on the common columns in the two tables being joined. Common columns are columns that have the same name in both tables.
 - A NATURAL JOIN can be an [INNER join](#02.01), a [LEFT OUTER join](#02.02), or a [RIGHT OUTER join](#02.03). The default is [INNER join](#02.01).
-- 
+- Not a recommenced join since the system decide on which column name need to join the table.
+- if system found the common column between table then it will perform the inner join else it will perform the full join.
+<br></br>
+
+
+**Create the sample table to understand the Natural Join**
+```sql
+create table if not exists table1(
+id int
+);
+create table if not exists table2(
+id int
+);
+
+
+-- insert the sample records in table1
+insert into table1 values
+(1),
+(1),
+(1),
+(2),
+(3),
+(3),
+(3);
+
+
+-- insert the sample records in table2
+insert into table2 values
+(1),
+(1),
+(2),
+(2),
+(4),
+(NULL);
+
+
+--select query
+select * from table1;
+select * from table2;
+
+
+-- NATURAL JOIN 
+SELECT * FROM table1 t1
+NATURAL JOIN table2 t2;
+```
+
+Since we have same column name(id) in both tables it will perform the inner join and we will get the below result:    
+
+![alt image02](resource/image02)
+
+
+Let's understand to change one of the table name to see how it does like cross join:    
+
+```sql
+-- RENAMING THE TABLE1 COLUMN ID TO ID_NEW
+alter table table1 rename column id to id_new;
+
+
+-- NATURAL JOIN 
+SELECT * FROM table1 t1
+NATURAL JOIN table2 t2;
+```
+
+Now YOU can see we are gating the 42 records since there isn't any matching columns between both the tableS.   
+
+**SAMPLE OUTPUT**   
+![alt image03](resource/image03)
+
+## WrapUP the Join
+
+lets create the sample table3 and table4 to understand the all join:
+
+```sql
+--Creating the table3
+create table if not exists table3(
+id int
+);
+
+
+--Creating the table4
+create table if not exists table4(
+id int
+);
+
+
+--inserting the sample value in table3
+insert into table3 values
+(1),
+(1),
+(1),
+(1),
+(1),
+(NULL),
+(NULL);
+
+
+--inserting the sample value in table4
+insert into table4 values
+(1),
+(1),
+(1),
+(2),
+(NULL);
+
+
+select * from table3;
+select * from table4;
+```
+<br></br>
+
+
+**Problem1** how many records will return in inner join:
+
+![alt image04](resource/image04)
+
+```sql
+-- inner join
+select * from table3 t3
+join table4 t4
+on t3.id=t4.id;
+```
+![alt image05](resource/image05)
+
+<br></br>
+
+**Problem2** How many records will return in the left join   
+```sql
+-- Left Join
+select * from table3 t3
+left join table4 t4
+on t3.id=t4.id;
+
+-- it should return the 17 records 
+-- inner join + Non-matching records from left table(which are 2 nulls)
+-- 15 + 2 = 17
+```
+![alt image06](resource/image06)
+
+
+<br></br>
+
+**Problem3** How many records will return in the right join   
+```sql
+-- Right Join
+select * from table3 t3
+right join table4 t4
+on t3.id=t4.id;
+
+-- it should return the 17 records 
+-- inner join + Non-matching records from right table(which is 2 and nulls)
+-- 15 + 2 = 17
+```
+![alt image06](resource/image06)
+
+
+<br></br>
+
+**Problem4** How many records will return in the full join   
+```sql
+-- Full Join
+select * from table3 t3
+full join table4 t4
+on t3.id=t4.id;
+
+-- it should return the 19 records 
+-- inner join + Non-matching records from right table(which is 2 and nulls) + Non-matching records from left table(which are 2 nulls)
+
+-- 15 + 2 + 2= 19
+```
+![alt image06](resource/image07)
+
+
+<br></br>
+
+**Problem5** How many records will return in the Natural join   
+```sql
+-- natural Join
+select * from table3 t3
+natural join table4 t4;
+
+-- it should return the 15 records 
+-- in both table3 and table4 the column(id) is matching so it will perform the inner join
+-- else it will perform the cross join
+
+-- so its should return the 15
+```
+![alt image06](resource/image05)
+
+
+<br></br>
+
+**Problem6** How many records will return in the cross join   
+```sql
+-- Full Join
+select * from table3 t3
+cross join table4 t4;
+
+-- it should return the 35 records 
+-- table3 = 7 and table4 = 5( 7 X 5 = 35)
+-- so its should return the 35
+```
+![alt image06](resource/image08)
