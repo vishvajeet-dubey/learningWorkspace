@@ -8,6 +8,7 @@
     * [02.04 Full Join/Full Outer Join](#02.04)
     * [02.05 Cross Join](#02.05)
     * [02.06 Natural Join](#02.06)
+    * [02.07 SQL Join Wrapup](#02.07)
 
 # 01. BASIC SQL <a class="anchor" id="01"></a>
 
@@ -437,7 +438,12 @@ Now YOU can see we are gating the 42 records since there isn't any matching colu
 **SAMPLE OUTPUT**   
 ![alt image03](resource/image03)
 
-## WrapUP the Join
+[↵ Back to Contenet](#content)
+<br></br>
+
+
+
+## 02.07 WrapUP the Join<a class="anchor" id="02.07"></a>
 
 lets create the sample table3 and table4 to understand the all join:
 
