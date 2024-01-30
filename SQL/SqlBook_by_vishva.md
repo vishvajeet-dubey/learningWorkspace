@@ -8,7 +8,14 @@
     * [02.04 Full Join/Full Outer Join](#02.04)
     * [02.05 Cross Join](#02.05)
     * [02.06 Natural Join](#02.06)
-    * [02.07 SQL Join Wrapup](#02.07)
+    * [02.07 SQL Join Wrap-Up](#02.07)    
+3. [Sub Query](#03)
+    * [03.01 Type of SubQuery](#03.01) 
+
+
+
+
+<br></br>
 
 # 01. BASIC SQL <a class="anchor" id="01"></a>
 
@@ -56,7 +63,7 @@ manager_id varchar(20)
 
 -- sample records
 insert into emp.employee values
-('E1, 'Rahul', 15000, 'D1', 'M1'),
+('E1', 'Rahul', 15000, 'D1', 'M1'),
 ('E2', 'Manoj', 15000, 'D1', 'M1'),
 ('E3', 'James', 55000, 'D2', 'M2'),
 ('E4', 'Michael', 25000, 'D2', 'M2'),
@@ -577,3 +584,57 @@ cross join table4 t4;
 -- so its should return the 35
 ```
 ![alt image06](resource/image08)
+
+[↵ Back to Contenet](#content)
+<br></br>
+
+
+
+
+
+
+
+
+
+
+
+# 03. SUB QUERY <a class="anchor" id="03"></a>
+- In SQL, a SELECT statement may contain another SQL statement, known as a subquery or nested query.
+- for more Please [click here](https://www.programiz.com/sql/subquery) to read the notes by programiz.
+
+
+In a subquery, the outer query's result depends on the result set of the inner subquery. That's why subqueries are also called **nested queries**.
+
+Here is how this code works:
+
+executes the subquery first (inner query), and returns the minimum age 22 executes the outer query, and selects customers with age 22
+```sql
+SELECT * 
+FROM customers
+WHERE age=(
+SELECT MIN(age)  ---> the inner query is replaced with a single value.
+FROM customers
+)
+```
+
+**Problem1:**: Find the employees who's salary is more than the average salary earned by all employees.
+```sql
+SELECT * FROM 
+  employee 
+WHERE salary > (
+  SELECT avg(salary) fROM employee -- inner query
+) 
+```
+![Alt image09](resource/image09.JPG)
+
+1. In above image first inner query is going to return the result.
+2. Once inner query result done then outer query is going to filter those employees whose salary is more than the average salary.
+
+## 03.01 TYPE OF SUBQUERY<a class="anchor" id="03.01"></a>
+1. Scalar Subquery
+2. Multiple Subquery
+3. Correlated Subquery
+
+### 03.01_a Scalar SubQuery<a class="anchor" id="03.01_a">
+- it will return one row and one column
+- 
