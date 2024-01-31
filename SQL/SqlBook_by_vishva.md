@@ -635,6 +635,6 @@ WHERE salary > (
 2. Multiple Subquery
 3. Correlated Subquery
 
-### 03.01_a Scalar SubQuery<a class="anchor" id="03.01_a">
+### 03.01_a Scalar SubQuery<a class="anchor" id="03.01_a"></a>
 - it will return one row and one column
 - 
