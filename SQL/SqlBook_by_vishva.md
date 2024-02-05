@@ -1070,7 +1070,7 @@ where dept_name not in (select distinct dept_name from employee);
 - Correlated subqueries are used for row-by-row processing. Each subquery is executed once for every row of the outer query.
 - A correlated subquery is evaluated once for each row processed by the parent statement. The parent statement can be a SELECT, UPDATE, or DELETE statement. 
 
-![Alt text](resource/image10.jpg)
+![Alt image10](resource/image10.JPG)
 
 
 **Problem01**
