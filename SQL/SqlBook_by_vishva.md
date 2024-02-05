@@ -1,6 +1,7 @@
 # Content <a class="anchor" id="content"></a>
 
 1. [Basic SQL](#01)
+    * [01.01 First Time Login in CLI](#01.01)
 2. [SQL JOIN](#02)
     * [02.01 Inner Join/Join](#02.01)
     * [02.02 Left Join/Left Outer Join](#02.02)
@@ -15,11 +16,281 @@
 
 
 
+
 <br></br>
 
 # 01. BASIC SQL <a class="anchor" id="01"></a>
+﻿For complete SQL roadmap please check out the TechTFQ blog[[Click here](https://techtfq.com/blog/how-to-learn-sql-for-free-roadmap-to-learning-sql)]
 
-# 02. SQL JOIN <a class="anchor" id="02"></a>
+**Concepts**
+
+**What is a Relational Database / RDBMS?**
+- How data is stored in a relational database?
+- What is a schema wrt to a relational database?
+
+
+**SQL commands**
+- DDL, DML, DCL, TCL, DQL
+- What are commands under each of these category and what each of these commands actually do?
+
+
+**Data Types**
+- String data type like VARCHAR, TEXT etc
+- Integer data type like INT, NUMBER etc.
+- DATE
+- FLOAT / DECIMAL
+- BOOLEAN
+- Also check out IDENTITY column (Auto Increment column)
+
+
+
+**Constraints**
+- Primary key
+- Foreign key
+- Check constraints, Not null, Unique, Default constraints
+
+
+
+**Normalization in SQL**
+- Different normal forms like 1NF, 2NF, 3NF BCNF
+
+
+
+**Operation**
+- Arithmetic operation
+- Logical operator
+- Comparison operator
+- UNION, UNION ALL operator
+
+
+
+**CASE Statement**
+- Simple case statement as well as nested case statement
+
+
+
+**Important SQL clause**
+- DISTINCT clause
+- Order by clause
+- Limit / Top clause     
+
+[↵ Back to content](#content)
+<br></br>
+
+
+## 01.01 First Time Login in CLI <a class="anchor" id="01.01"></a>    
+**Login to the Postgres user**  
+```sh
+$ sudo -u postgres psql
+``` 
+
+
+**Showing all user**  
+```sh
+postgres=# \du
+``` 
+![alt CLI01](resource/CLI01.png)
+<br></br>
+
+
+**Showing database**
+```sh
+postgres=# \l
+```
+![alt CLI02](resource/CLI02.png)
+<br></br>
+
+
+**Changing the database in PSQL**   
+```sh
+postgres=# \c databseName;
+```
+![alt CLI03](resource/CLI03.png)
+<br></br>
+
+
+**Showing tables**  
+```sh
+test=# \dt
+```
+![alt CLI04](resource/CLI04.png)
+
+
+
+**STARTING THE POSTGRES SERVICES IN UBUNTU**
+
+follow the below step in-order to install the postgres and pgadmin
+
+\<https://www.tecmint.com/install-postgresql-and-pgadmin-in-ubuntu/\>
+
+
+
+$ service postgresql   
+Usage: /etc/init.d/postgresql {start|stop|restart|reload|force-reload|status} [version ..]
+
+
+$ service postgresql start     
+
+$ service postgresql status   
+```
+● postgresql.service - PostgreSQL RDBMS
+Loaded: loaded (/lib/systemd/system/postgresql.service; enabled; vendor preset: enabled)
+Active: active (exited) since Mon 2023-05-01 13:33:45 IST; 1h 3min ago
+Main PID: 1073 (code=exited, status=0/SUCCESS)
+Tasks: 0 (limit: 14008)
+Memory: 0B
+CGroup: /system.slice/postgresql.service
+May 01 13:33:45 vishvapc systemd[1]: Starting PostgreSQL RDBMS...
+May 01 13:33:45 vishvapc systemd[1]: Finished PostgreSQL RDBMS...
+```
+<br></br>
+
+
+**DATABASE AND USERS**   
+
+**DATABASE:** `postgres=# \l`
+
+USERS: `postgres=# \du`
+
+
+
+**CHANGING THE PASSWORD FOR DEFAUL USER:**   
+`postgres=# ALTER USER postgres WITH PASSWORD 'pglogin';`
+
+```SQL
+--OUTPUT
+OUTPUT: ALTER ROLE   
+--once you above output came means user password has been set.
+```
+<br></br>
+
+
+
+**CREATING THE NEW USER**  
+`postgres=# CREATE USER vishva_pg WITH PASSWORD 'pglogin';`
+```SQL
+--OUTPUT
+CREATE ROLE
+--once you saw the `CREATE ROLE` meaning the user has been created successfully.
+```
+<br></br>
+
+
+`postgres=# \du`   
+![alt CLI05](resource/CLI05.png)     
+NOTE: after creating the user you have to provide the user privileges.
+<br></br>
+
+
+
+**GRANTING USER ACCESS:**     
+`postgres=# ALTER USER vishva\_pg WITH SUPERUSER;`
+```SQL
+--OUTPUT
+ALTER ROLE
+```
+
+
+**DELETING THE USER:**    
+postgres=# CREATE USER userNameTest WITH PASSWORD 'asdfahsd@123';   
+CREATE ROLE
+
+
+
+postgres=# DROP USER usernametest;    
+DROP ROLE
+
+
+
+postgres=#    
+postgres=# \du      
+![alt CLI06](resource/CLI05.png)
+<br></br>
+
+
+**CONNECTING THROUGH THE PGADMIN WEBUI:**   
+#STEP 1: check the status of apache server:   
+`$sudo service apache2 status`
+
+
+#STEP 2: login to postgres and see the below status   
+`$service postgresql`    
+`Usage: /etc/init.d/postgresql {start|stop|restart|reload|force-reload|status} [version ..]`     
+if services is offline then start it then login
+
+
+#STEP 3: Below are the link to login through pgadmin web    
+You can now start using pgAdmin 4 in web mode at     
+[http://127.0.0.1/pgadmin4](http://127.0.0.1/pgadmin4)
+
+
+
+**STEP 1:** check the status of apache server:     
+$sudo service apache2 status
+
+
+**STEP 2:** login to postgres and see the below status    
+$service postgresql    
+`Usage: /etc/init.d/postgresql {start|stop|restart|reload|force-reload|status} [version ..]`
+
+if services is offline then start it then login
+
+
+
+**STEP 3:** Below are the link to login through pgadmin web    
+#You can now start using pgAdmin 4 in web mode at    
+[http://127.0.0.1/pgadmin4](http://127.0.0.1/pgadmin4)
+
+
+BELOW ARE THE USER ID AND PASSWORD:    
+contact.vdubey@gmail.com
+
+asdfahsd@123
+________________________________________
+[↵ Back to content](#content)
+<br></br>
+
+
+**APACHE SERVER**   
+**OPTION 1ST:**   
+First you check your status using this command   
+$sudo service apache2 status    
+#then stop the running service   
+$sudo service apache2 stop   
+#then use this command:    
+$sudo /opt/lampp/lampp start
+<br></br>
+
+
+
+**OPTION 2ND(systemctl):**   
+You can use the `systemctl` command for apache service restarting; this controls the systemd system and service manager.
+
+**for Restarting Apache With systemctl Command:**    
+`$sudo systemctl restart apache2.service`
+
+In case of being hang up or getting no response on restarting you can use the systemctl stop command to stop the service then start with the systemctl start command. Commands are as follows
+
+**For Stopping Apache With systemctl Command:**      
+`$sudo systemctl stop apache2.service`
+
+
+**For Starting Apache With systemctl Command:**     
+`$sudo systemctl start apache2.service`
+
+
+**You can also use the reload command for only reloading the apache service.**    
+
+**For Reloading Apache With systemctl Command:**       
+`$sudo systemctl reload apache2.service`
+____________________________________________
+[↵ Back to content](#content)
+<br></br>
+
+
+
+
+# 02. SQL JOIN <a class="anchor" id="02"></a>       
 
 A JOIN clause is used to combine rows from two or more tables, based on
 a related column between them. **
@@ -35,7 +306,7 @@ fetched, the temporary image of the merged tables is dumped.
 going to create under emp schema)**
 
 ```sql
-CREATE SCHEMA IF NOT EXISTS schema_name AUTHORIZATION user_name;
+CREATE SCHEMA IF NOT EXISTS schema_name AUTHORIZATION user_name; -- creating schema
 
 --i.e:
 
@@ -141,7 +412,7 @@ SELECT * FROM emp.department;
 SELECT * FROM emp.manager;
 SELECT * FROM emp.projects;
 ```
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 
 <br></br>
 **Q1. FETCH THE EMPLOYEE NAME AND THE DEPARTMENT NAME THEY BELONG TO:**  
@@ -162,7 +433,7 @@ FROM emp.employee emp_table
 INNER JOIN emp.department dep_table
 ON emp_table.dept_id=dep_table.dept_id;
 ```
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 
 
 
@@ -187,7 +458,7 @@ FROM emp.employee emp_table
 LEFT JOIN emp.department dep_table
 ON emp_table.dept_id=dep_table.dept_id;
 ```
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -231,7 +502,7 @@ JOIN emp.manager m ON m.manager_id = e.manager_id
 LEFT JOIN emp.department d ON d.dept_id = e.dept_id
 LEFT JOIN emp.projects p ON p.team_member_id=e.emp_id;
 ```
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -301,7 +572,7 @@ insert into family values
 ```
 
 Run above sql query to create table to undertand rest joins.    
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -334,7 +605,7 @@ inner join ==> join
 full join ==> full outer join
 ```
 
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 ## 02.05 Cross Join <a class="anchor" id="02.05"></a>
@@ -369,7 +640,7 @@ from employee e
 inner join department d on e.dept_id=d.dept_id
 cross join company c;
 ```
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -445,7 +716,7 @@ Now YOU can see we are gating the 42 records since there isn't any matching colu
 **SAMPLE OUTPUT**   
 ![alt image03](resource/image03)
 
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -585,7 +856,7 @@ cross join table4 t4;
 ```
 ![alt image06](resource/image08)
 
-[↵ Back to Contenet](#content)
+[↵ Back to content](#content)
 <br></br>
 
 
@@ -617,6 +888,100 @@ FROM customers
 )
 ```
 
+FOR UNDERSTAND LETS CREATE THE BELOW TABLES:       
+```sql
+DROP TABLE employee_history;
+DROP TABLE EMPLOYEE;
+drop table department;
+DROP table sales ;
+
+create table department
+(
+	dept_id		int ,
+	dept_name	varchar(50) PRIMARY KEY,
+	location	varchar(100)
+);
+insert into department values (1, 'Admin', 'Bangalore');
+insert into department values (2, 'HR', 'Bangalore');
+insert into department values (3, 'IT', 'Bangalore');
+insert into department values (4, 'Finance', 'Mumbai');
+insert into department values (5, 'Marketing', 'Bangalore');
+insert into department values (6, 'Sales', 'Mumbai');
+
+CREATE TABLE EMPLOYEE
+(
+    EMP_ID      INT PRIMARY KEY,
+    EMP_NAME    VARCHAR(50) NOT NULL,
+    DEPT_NAME   VARCHAR(50) NOT NULL,
+    SALARY      INT,
+    constraint fk_emp foreign key(dept_name) references department(dept_name)
+);
+insert into employee values(101, 'Mohan', 'Admin', 4000);
+insert into employee values(102, 'Rajkumar', 'HR', 3000);
+insert into employee values(103, 'Akbar', 'IT', 4000);
+insert into employee values(104, 'Dorvin', 'Finance', 6500);
+insert into employee values(105, 'Rohit', 'HR', 3000);
+insert into employee values(106, 'Rajesh',  'Finance', 5000);
+insert into employee values(107, 'Preet', 'HR', 7000);
+insert into employee values(108, 'Maryam', 'Admin', 4000);
+insert into employee values(109, 'Sanjay', 'IT', 6500);
+insert into employee values(110, 'Vasudha', 'IT', 7000);
+insert into employee values(111, 'Melinda', 'IT', 8000);
+insert into employee values(112, 'Komal', 'IT', 10000);
+insert into employee values(113, 'Gautham', 'Admin', 2000);
+insert into employee values(114, 'Manisha', 'HR', 3000);
+insert into employee values(115, 'Chandni', 'IT', 4500);
+insert into employee values(116, 'Satya', 'Finance', 6500);
+insert into employee values(117, 'Adarsh', 'HR', 3500);
+insert into employee values(118, 'Tejaswi', 'Finance', 5500);
+insert into employee values(119, 'Cory', 'HR', 8000);
+insert into employee values(120, 'Monica', 'Admin', 5000);
+insert into employee values(121, 'Rosalin', 'IT', 6000);
+insert into employee values(122, 'Ibrahim', 'IT', 8000);
+insert into employee values(123, 'Vikram', 'IT', 8000);
+insert into employee values(124, 'Dheeraj', 'IT', 11000);
+
+
+CREATE TABLE employee_history
+(
+    emp_id      INT PRIMARY KEY,
+    emp_name    VARCHAR(50) NOT NULL,
+    dept_name   VARCHAR(50),
+    salary      INT,
+    location    VARCHAR(100),
+    constraint fk_emp_hist_01 foreign key(dept_name) references department(dept_name),
+    constraint fk_emp_hist_02 foreign key(emp_id) references employee(emp_id)
+);
+
+create table sales
+(
+	store_id  		int,
+	store_name  	varchar(50),
+	product_name	varchar(50),
+	quantity		int,
+	price	     	int
+);
+insert into sales values
+(1, 'Apple Store 1','iPhone 13 Pro', 1, 1000),
+(1, 'Apple Store 1','MacBook pro 14', 3, 6000),
+(1, 'Apple Store 1','AirPods Pro', 2, 500),
+(2, 'Apple Store 2','iPhone 13 Pro', 2, 2000),
+(3, 'Apple Store 3','iPhone 12 Pro', 1, 750),
+(3, 'Apple Store 3','MacBook pro 14', 1, 2000),
+(3, 'Apple Store 3','MacBook Air', 4, 4400),
+(3, 'Apple Store 3','iPhone 13', 2, 1800),
+(3, 'Apple Store 3','AirPods Pro', 3, 750),
+(4, 'Apple Store 4','iPhone 12 Pro', 2, 1500),
+(4, 'Apple Store 4','MacBook pro 16', 1, 3500);
+
+
+select * from employee;
+select * from department;
+select * from employee_history;
+select * from sales;
+
+```
+
 **Problem1:**: Find the employees who's salary is more than the average salary earned by all employees.
 ```sql
 SELECT * FROM 
@@ -630,6 +995,15 @@ WHERE salary > (
 1. In above image first inner query is going to return the result.
 2. Once inner query result done then outer query is going to filter those employees whose salary is more than the average salary.
 
+we can rewrite the same query using the join
+```sql
+select * from
+employee e
+join (select avg(salary) sal from employee) avg_sal
+on e.salary>avg_sal.sal;
+```
+
+
 ## 03.01 TYPE OF SUBQUERY<a class="anchor" id="03.01"></a>
 1. Scalar Subquery
 2. Multiple Subquery
@@ -637,4 +1011,86 @@ WHERE salary > (
 
 ### 03.01_a Scalar SubQuery<a class="anchor" id="03.01_a"></a>
 - it will return one row and one column
-- 
+
+Example:
+```sql
+SELECT * FROM 
+  employee 
+WHERE salary > (
+  SELECT avg(salary) fROM employee -- inner query --> will return the one column and one row.
+
+--we can rewrite the same query using the join
+select * from
+employee e
+join (select avg(salary) sal from employee) avg_sal
+on e.salary>avg_sal.sal;
+```
+
+
+
+
+
+
+
+ ### 03.01_b Multiple SubQuery<a class="anchor" id="03.01_b"></a>
+ 1. Subquery which returns multiple column and multiple rows.
+ 2. Subquery which returns one column and multiple rows.
+
+ **PROBLEM01** Find the employees who earn the highest salary in each department.
+ ```sql
+ 
+-- multiple column, multiple row subquery
+--1) find the highest salary in each department.
+--2) filter the employees based on above result.
+
+select *
+from employee e
+where (dept_name,salary) in (select dept_name, max(salary) from employee group by dept_name)
+order by dept_name, salary;
+
+
+-- Single column, multiple row subquery
+/* QUESTION: Find department who do not have any employees */
+--1) find the departments where employees are present.
+--2) from the department table filter out the above results.
+
+select *
+from department
+where dept_name not in (select distinct dept_name from employee);
+ ```
+
+
+
+
+
+
+
+### 03.01_c Correlated SubQuery<a class="anchor" id="03.01_c"></a>
+- A subquery which is related to the outer query. **
+- Correlated subqueries are used for row-by-row processing. Each subquery is executed once for every row of the outer query.
+- A correlated subquery is evaluated once for each row processed by the parent statement. The parent statement can be a SELECT, UPDATE, or DELETE statement. 
+
+![Alt text](resource/image10.jpg)
+
+
+**Problem01**
+Find the employees in each department who earn more than the average salary in that department.
+```sql
+select * from employee e1 
+where salary >(select avg(salary) from employee e2 
+			   where e2.dept_name=e1.dept_name)
+```
+
+Note: in above query the inner query/subquery will not run without the outer query since we are checking the dept_name from the e1 table.
+
+
+
+
+**Problem02**
+Find the department who don't have any employee
+```sql
+select dept_name
+from department d
+where not exists (select dept_name from employee e
+					   where e.dept_name=d.dept_name)
+```
