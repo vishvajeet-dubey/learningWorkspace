@@ -11,9 +11,12 @@
     * [02.06 Natural Join](#02.06)
     * [02.07 SQL Join Wrap-Up](#02.07)    
 3. [Sub Query](#03)
-    * [03.01 Type of SubQuery](#03.01) 
-
-
+    * [03.01 Type of SubQuery](#03.01)  
+        * [03.01_a Scalar SubQuery](#03.01_a)  
+        * [03.01_b Multiple SubQuery](#03.01_b)  
+        * [03.01_c Correlated SubQuery](#03.01_c)       
+4. [SQL WITH Clause / CTE Query](#04)
+5. [Window Function](#05)
 
 
 
@@ -726,7 +729,7 @@ Now YOU can see we are gating the 42 records since there isn't any matching colu
 lets create the sample table3 and table4 to understand the all join:
 
 ```sql
---Creating the table3
+--Creating table3
 create table if not exists table3(
 id int
 );
@@ -738,7 +741,7 @@ id int
 );
 
 
---inserting the sample value in table3
+--inserting sample value in table3
 insert into table3 values
 (1),
 (1),
@@ -749,7 +752,7 @@ insert into table3 values
 (NULL);
 
 
---inserting the sample value in table4
+--inserting sample value in table4
 insert into table4 values
 (1),
 (1),
@@ -1094,3 +1097,106 @@ from department d
 where not exists (select dept_name from employee e
 					   where e.dept_name=d.dept_name)
 ```
+_________________________________________
+[↵ Back to content](#content)
+<br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 04. SQL WITH Clause / CTE Query <a class="anchor" id="04"></a>
+- CTE => Common Table Expression.
+- Also called Sub Query Factoring.  
+- It will create the temp table and going to reference that table in entire query.
+- Using with clause we can improve the performance if the same query are using multiples times.
+
+
+
+```sql
+-- Fetch employees who earn more than average salary of all employees
+
+with average_salary(avg_Sal) as 
+	(select avg(salary) from employee)
+select *
+from employee e, average_salary av
+where e.salary > av.avg_sal;
+
+```
+<br></br>
+
+
+**Problem02**  
+```sql
+-- Find stores who's sales where better than the average sales across all stores.
+--SOLUTION -> lets divide the problem and understand how can we solve it.
+-- 1) Total sales per each store -- Total sales
+select s.store_id, sum(price) as total_sales_per_store
+from sales s 
+group by s.store_id;
+
+
+--2) Find the average sales with respect all the stores. --Avg_Sales
+select cast(avg(total_sales_per_store) as int) as avg_sales_for_all_stores 
+from (select s.store_id, sum(price) as total_sales_per_store
+from sales s 
+group by s.store_id)x;
+
+
+--3) Find the stores where Total_Sales > Avg_Sales of all stores.
+-- Subquery(Final ANS)
+select * 
+from (
+	select s.store_id, sum(price) as total_sales_per_store
+	from sales s 
+	group by s.store_id
+	) total_sales
+join (
+	select cast(avg(total_sales_per_store) as int) as avg_sales_for_all_stores 
+	from (select s.store_id, sum(price) as total_sales_per_store
+	from sales s 
+	group by s.store_id)x
+	) avg_sales
+	on total_sales.total_sales_per_store > avg_sales.avg_sales_for_all_stores;
+
+
+-- USING WITH CLAUSE(Final ANS)
+with total_sales(store_id, total_sales_per_store) as
+		(select s.store_id, sum(price) as total_sales_per_store
+		from sales s 
+		group by s.store_id),
+	avg_sales(avg_sales_for_all_stores) as
+		(select cast(avg(total_sales_per_store) as int) as avg_sales_for_all_stores 
+		from total_sales)
+select *
+from total_sales ts
+join avg_sales av
+on ts.total_sales_per_store > av.avg_sales_for_all_stores;
+```
+_________________________________________
+[↵ Back to content](#content)
+<br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 05. Window Function <a class="anchor" id="05"></a>
+- 
